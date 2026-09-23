@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Главная — Школьная библиотека{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Школьная библиотека</h1>
+  <p>Ищи книги, бери их на дом и следи за сроками возврата — всё в одном месте.</p>
+  <div class="hero-actions">
+    <a href="/catalog/" class="btn btn-primary">Каталог книг</a>
+    <a href="/login/" class="btn btn-outline" id="hero-login">Войти</a>
+  </div>
+</section>
+
+<section class="info-block">
+  <h2>О библиотеке</h2>
+  <p>
+    Электронная библиотека школы позволяет ученикам и учителям находить нужные книги,
+    оформлять выдачу через библиотекаря и отслеживать сроки возврата.
+  </p>
+</section>
+{% endblock %}

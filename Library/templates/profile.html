@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Профиль — Школьная библиотека{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+
+  <div class="profile-card">
+    <div class="profile-card-header">
+      <div class="profile-info">
+        <img id="profile-avatar" src="" alt="Аватар" class="avatar" style="display:none;">
+        <div>
+          <div id="profile-name" class="profile-name"></div>
+          <div id="profile-email" class="profile-email"></div>
+        </div>
+      </div>
+      <button type="button" id="profile-edit-btn" class="btn btn-primary">Изменить</button>
+    </div>
+
+    <form id="profile-form" enctype="multipart/form-data">
+      <div class="form-grid">
+        <label>Имя
+          <input type="text" name="first_name" disabled placeholder="Ваше имя">
+        </label>
+        <label>Фамилия
+          <input type="text" name="last_name" disabled placeholder="Ваша фамилия">
+        </label>
+        <label>Телефон
+          <input type="text" name="phone" disabled placeholder="Телефон">
+        </label>
+        <label>Email
+          <input type="email" name="email" disabled placeholder="Email">
+        </label>
+        <label class="form-grid-full">Аватар
+          <div class="avatar-upload">
+            <img id="avatar-file-preview" class="avatar-upload-preview" style="display:none;">
+            <input type="file" id="avatar-input" name="avatar" accept="image/*" disabled style="display:none;">
+            <button type="button" id="avatar-choose-btn" class="btn btn-outline btn-small" disabled>Выбрать файл</button>
+            <button type="button" id="avatar-camera-btn" class="btn btn-outline btn-small" disabled>Сфотографироваться</button>
+            <span id="avatar-filename" class="avatar-filename">Файл не выбран</span>
+          </div>
+        </label>
+      </div>
+      <p class="form-error" id="profile-form-error"></p>
+      <p class="form-success" id="profile-form-success"></p>
+      <div class="profile-form-actions" id="profile-form-actions" style="display:none;">
+        <button type="button" class="btn btn-outline" id="profile-cancel-btn">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal" id="camera-modal" style="display:none;">
+    <div class="modal-content camera-modal-content">
+      <h2>Сделать фото</h2>
+      <video id="camera-video" autoplay playsinline></video>
+      <canvas id="camera-canvas" style="display:none;"></canvas>
+      <p class="form-error" id="camera-error"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="camera-cancel-btn">Отмена</button>
+        <button type="button" class="btn btn-primary" id="camera-shot-btn">Снять фото</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-section">
+    <div class="stats-grid" id="profile-stats-grid">
+      <p>Загрузка статистики...</p>
+    </div>
+  </div>
+
+  <div class="profile-section">
+    <h2>Мои книги на руках</h2>
+    <table class="loans-table">
+      <thead>
+        <tr>
+          <th>Книга</th>
+          <th>Срок возврата</th>
+          <th>Статус</th>
+          <th>Действие</th>
+        </tr>
+      </thead>
+      <tbody id="profile-loans-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="profile-section">
+    <h2>Мои брони</h2>
+    <table class="loans-table">
+      <thead>
+        <tr>
+          <th>Книга</th>
+          <th>Статус</th>
+          <th>Действие</th>
+        </tr>
+      </thead>
+      <tbody id="profile-reservations-tbody"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

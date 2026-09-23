@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Админка — Школьная библиотека{% endblock %}
+
+{% block content %}
+<section class="admin-page">
+  <h1>Админка</h1>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="stats-tab">Статистика</button>
+    <button class="tab-btn" data-tab="books-tab">Книги</button>
+    <button class="tab-btn" data-tab="loans-tab">Выданные книги</button>
+    <button class="tab-btn" data-tab="log-tab">Журнал действий</button>
+  </div>
+
+  <div id="stats-tab" class="admin-tab">
+    <div class="stats-grid" id="stats-grid">
+      <p>Загрузка...</p>
+    </div>
+  </div>
+
+  <div id="books-tab" class="admin-tab" style="display:none;">
+    <p>Добавление и редактирование книг — на странице каталога.</p>
+    <a href="/catalog/" class="btn btn-outline">Перейти в каталог</a>
+  </div>
+
+  <div id="loans-tab" class="admin-tab" style="display:none;">
+    <p>Выдача и приём книг, продление и штрафы — на странице выдач.</p>
+    <a href="/loans/" class="btn btn-outline">Перейти к выданным книгам</a>
+  </div>
+
+  <div id="log-tab" class="admin-tab" style="display:none;">
+    <table class="loans-table">
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Кто</th>
+          <th>Действие</th>
+          <th>Объект</th>
+        </tr>
+      </thead>
+      <tbody id="log-tbody"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/admin_panel.js' %}"></script>
+{% endblock %}

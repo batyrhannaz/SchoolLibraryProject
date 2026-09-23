@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Выдачи — Школьная библиотека{% endblock %}
+
+{% block content %}
+<section class="loans-page">
+  <h1 id="loans-title">Мои выдачи</h1>
+
+  <div class="filters" id="librarian-filters" style="display:none;">
+    <select id="status-filter">
+      <option value="">Все статусы</option>
+      <option value="active">На руках</option>
+      <option value="returned">Возвращена</option>
+      <option value="overdue">Просрочена</option>
+    </select>
+    <button id="issue-book-btn" class="btn btn-primary">+ Выдать книгу</button>
+  </div>
+
+  <table class="loans-table">
+    <thead>
+      <tr>
+        <th>Книга</th>
+        <th id="col-user" style="display:none;">Читатель</th>
+        <th>Дата выдачи</th>
+        <th>Срок возврата</th>
+        <th>Статус</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody id="loans-tbody"></tbody>
+  </table>
+</section>
+
+<div id="issue-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2>Выдать книгу</h2>
+    <form id="issue-form">
+      <label>ID книги <input type="number" name="book" required></label>
+      <label>Username читателя <input type="text" name="user_username" required></label>
+      <p class="form-error" id="issue-form-error"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="issue-modal-cancel">Отмена</button>
+        <button type="submit" class="btn btn-primary">Выдать</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/loans.js' %}"></script>
+{% endblock %}

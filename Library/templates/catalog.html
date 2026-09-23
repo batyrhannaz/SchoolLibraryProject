@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Каталог — Школьная библиотека{% endblock %}
+
+{% block content %}
+<section class="catalog-page">
+  <h1>Каталог книг</h1>
+
+  <div class="filters">
+    <input type="text" id="search-input" placeholder="Поиск по названию, автору, ISBN...">
+    <select id="category-filter">
+      <option value="">Все категории</option>
+    </select>
+    <select id="availability-filter">
+      <option value="">Любая доступность</option>
+      <option value="true">Только доступные</option>
+      <option value="false">Нет в наличии</option>
+    </select>
+    <button id="add-book-btn" class="btn btn-primary" style="display:none;">+ Добавить книгу</button>
+  </div>
+
+  <div id="book-list" class="book-list"></div>
+  <div id="pagination" class="pagination"></div>
+</section>
+
+<div id="book-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2 id="book-modal-title">Добавить книгу</h2>
+    <form id="book-form">
+      <input type="hidden" name="id">
+      <label>Название <input type="text" name="title" required></label>
+      <label>Автор (ID или создастся новый) <input type="text" name="author_name" required></label>
+      <label>Категория <input type="text" name="category_name"></label>
+      <label>Год издания <input type="number" name="year" required></label>
+      <label>ISBN <input type="text" name="isbn"></label>
+      <label>Описание <textarea name="description"></textarea></label>
+      <label>Всего экземпляров <input type="number" name="total_copies" min="1" value="1" required></label>
+      <p class="form-error" id="book-form-error"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="book-modal-cancel">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/catalog.js' %}"></script>
+{% endblock %}
