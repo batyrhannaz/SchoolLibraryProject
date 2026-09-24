@@ -106,15 +106,25 @@ WSGI_APPLICATION = 'Library.wsgi.application'
 # переменную окружения DATABASE_URL — её и используем через dj_database_url.
 # Локально (если DATABASE_URL не задан) используются отдельные переменные ниже.
 
-import dj_database_url, os
+import os
+import dj_database_url
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev-key-only-for-local")
+ALLOWED_HOSTS = [".onrender.com", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default="sqlite:///db.sqlite3",
         conn_max_age=600,
-        ssl_require=True,
+        ssl_require="DATABASE_URL" in os.environ,
     )
 }
+
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
