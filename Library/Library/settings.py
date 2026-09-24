@@ -106,21 +106,15 @@ WSGI_APPLICATION = 'Library.wsgi.application'
 # переменную окружения DATABASE_URL — её и используем через dj_database_url.
 # Локально (если DATABASE_URL не задан) используются отдельные переменные ниже.
 
+import dj_database_url, os
+
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.getenv(
-            "DATABASE_URL",
-            f"postgres://{os.getenv('DB_USER', 'postgres')}:"
-            f"{os.getenv('DB_PASSWORD', '')}@"
-            f"{os.getenv('DB_HOST', 'localhost')}:"
-            f"{os.getenv('DB_PORT', '5432')}/"
-            f"{os.getenv('DB_NAME', 'school_db')}",
-        ),
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
-        ssl_require=os.getenv('DB_SSL_REQUIRE', 'False') == 'True',
+        ssl_require=True,
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
